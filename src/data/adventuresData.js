@@ -1,5 +1,5 @@
 // src/data/adventuresData.js
-// BASE DE DATOS FINAL - GUARDIANES DEL JARDÍN
+// BASE DE DATOS FINAL - AUDIO 100% LOCAL Y REAL
 
 export const ADVENTURES_DATA = {
   1: {
@@ -23,20 +23,20 @@ export const ADVENTURES_DATA = {
           {
             id: 'audio_1_parvulos_1',
             type: 'audio',
-            title: 'Historia: Amigos del Bosque',
-            artist: 'Narradores Guardianes',
-            file: 'https://drive.google.com/file/d/1mUXbpDbE5My3IOSZSdMdShtTyczf0QdO/view',
-            duration: '8 min',
-            description: '🌸 Florencia la Flor, 🐝 Abejita Zumbadora, 🌳 Arbolito Generoso y 💧 Gotita de Agua descubren que todos se necesitan en el jardín de Dios.',
+            title: 'Guardianes del Jardín',
+            artist: 'Coro Infantil',
+            file: require('../../assets/audio/guardianes_del_jardin.mp3'),
+            duration: '3:00',
+            description: 'Canción principal de los Guardianes del Jardín.',
           },
           {
             id: 'audio_1_parvulos_2',
             type: 'audio',
-            title: 'Canción: Todos Nos Ayudamos',
-            artist: 'Coro Infantil Guardianes',
-            file: 'https://drive.google.com/file/d/19ZzcY0NuKX_iPSkoC4N4Z3G39V_0KFQY/view',
-            duration: '3 min',
-            description: '🎵 Canción alegre con movimientos. Perfecta para cantar y bailar juntos.',
+            title: 'El sol brilla fuerte',
+            artist: 'Narradores',
+            file: require('../../assets/audio/el_sol_brilla.mp3'),
+            duration: '3:00',
+            description: 'El sol brilla fuerte, la flor abre sus pétalos.',
           },
         ],
       },
@@ -51,20 +51,20 @@ export const ADVENTURES_DATA = {
           {
             id: 'audio_1_principiantes_1',
             type: 'audio',
-            title: 'Historia: El Equipo del Jardín',
+            title: 'Dios me dio un cerebro',
             artist: 'Teatro Guardianes',
-            file: 'https://drive.google.com/file/d/1JSMaYn-VoVMPNs2bBDedCAaYpjx4YPS1/view',
-            duration: '12 min',
-            description: 'Una aventura teatral sobre el Sol, Agua, Plantas y Animales formando un equipo increíble.',
+            file: require('../../assets/audio/dios_me_dio_cerebro.mp3'),
+            duration: '4:00',
+            description: 'Dios me dio un cerebro para pensar y cuidar la creación.',
           },
           {
             id: 'audio_1_principiantes_2',
             type: 'audio',
-            title: 'Canción: La Red de la Vida',
+            title: 'Había un río',
             artist: 'Banda Guardianes',
-            file: 'https://drive.google.com/file/d/1sX0pzcZcEOsw8TdTroQWpdvSVeWUbVvd/view',
-            duration: '4 min',
-            description: 'Rock suave con conceptos más profundos de interdependencia.',
+            file: require('../../assets/audio/habia_un_rio.mp3'),
+            duration: '4:00',
+            description: 'Había un río que cantaba al pasar.',
           },
         ],
       },
@@ -78,11 +78,11 @@ export const ADVENTURES_DATA = {
           {
             id: 'audio_1_primarios_1',
             type: 'audio',
-            title: 'Podcast: El Caso Yellowstone',
+            title: 'La hoja que cae',
             artist: 'Dr. Ecólogo Guardián',
-            file: 'https://drive.google.com/file/d/1umJUKgQNwvftaDHHIviS-cbC1wjr5uL8/view',
-            duration: '15 min',
-            description: '🎙️ Documental narrado sobre cómo los lobos transformaron Yellowstone.',
+            file: require('../../assets/audio/la_hoja_que_cae.mp3'),
+            duration: '5:00',
+            description: 'La hoja que cae no muere al tocar el suelo.',
           },
         ],
       },
@@ -96,11 +96,11 @@ export const ADVENTURES_DATA = {
           {
             id: 'audio_1_intermedios_1',
             type: 'audio',
-            title: 'Podcast: Dooyeweerd y la Creación',
-            artist: 'Prof. Teólogo Reformacional',
-            file: 'https://drive.google.com/file/d/1TftCp5yyGgeJDalfYT7pOVkHuCrpDEqb/view',
-            duration: '25 min',
-            description: '🎓 Exploración profunda de la filosofía reformacional aplicada a la ecología y mayordomía.',
+            title: 'No tengo un jardín',
+            artist: 'Prof. Reformacional',
+            file: require('../../assets/audio/no_tengo_jardin.mp3'),
+            duration: '6:00',
+            description: 'No tengo un jardín grande que cuidar.',
           },
         ],
       },
@@ -122,11 +122,11 @@ export const ADVENTURES_DATA = {
           {
             id: 'audio_2_parvulos_1',
             type: 'audio',
-            title: 'Historia: El Viaje de la Gotita',
+            title: 'Una niña plantó una semilla',
             artist: 'Narradores Guardianes',
-            file: 'https://drive.google.com/file/d/1EgQ21tFqFD2esM25gkTWmNwAvzxOv26e/view',
-            duration: '10 min',
-            description: '💧 Sigue a Gotita en su viaje por el ciclo del agua.',
+            file: require('../../assets/audio/nina_planto_semilla.mp3'),
+            duration: '5:00',
+            description: 'Una niña plantó una semilla con amor.',
           },
         ],
       },
@@ -163,7 +163,6 @@ export const MATERIAL_TYPES = {
   article: { icon: 'document-text', label: 'Lectura', color: '#F39C12' },
 };
 
-// === RECOLECTOR GLOBAL DE AUDIOS PARA EL MENÚ PRINCIPAL ===
 export const getAllAudiosPlaylist = () => {
   let allAudios = [];
   Object.values(ADVENTURES_DATA).forEach(adventure => {
