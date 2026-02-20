@@ -3,7 +3,8 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { ADVENTURES_DATA, MATERIAL_TYPES } from '../data/adventuresData';
+// ¡AQUÍ ESTÁ LA IMPORTACIÓN CORRECTA!
+import { ADVENTURES_DATA, MATERIAL_TYPES, getAdventurePlaylist } from '../data/adventuresData';
 
 export default function AdventureDetailScreen({ route, navigation }) {
   const { adventureId, selectedAgeGroup } = route.params || { adventureId: 1 };
@@ -59,7 +60,18 @@ export default function AdventureDetailScreen({ route, navigation }) {
               style={styles.materialCard}
               onPress={() => {
                 if (material.type === 'audio') {
-                  navigation.navigate('AudioPlayer', { material });
+                  // Lógica del reproductor corregida
+                  const playlist = getAdventurePlaylist(adventureId, selectedAgeGroup);
+                  const startIndex = playlist.findIndex(p => p.id === material.id);
+                  navigation.navigate('RommelFiPlayer', {
+                    material: {
+                      ...material,
+                      id: material.id || Date.now(),
+                      artist: material.artist || 'Guardianes del Jardín',
+                    },
+                    playlist: playlist,
+                    startIndex: startIndex >= 0 ? startIndex : 0,
+                  });
                 } else {
                   navigation.navigate('MaterialViewer', { material });
                 }
@@ -86,93 +98,20 @@ export default function AdventureDetailScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F8F9FA',
-  },
-  header: {
-    padding: 30,
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
-  },
-  headerTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 5,
-  },
-  headerSubtitle: {
-    fontSize: 18,
-    color: 'rgba(255, 255, 255, 0.95)',
-  },
-  content: {
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    padding: 20,
-  },
-  description: {
-    fontSize: 16,
-    paddingHorizontal: 20,
-    color: '#7F8C8D',
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    color: '#2C3E50',
-  },
-  ageGroupCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    padding: 20,
-    marginHorizontal: 20,
-    marginBottom: 10,
-    borderRadius: 15,
-  },
-  ageGroupIcon: {
-    fontSize: 40,
-    marginRight: 15,
-  },
-  ageGroupName: {
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  materialCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    padding: 15,
-    marginBottom: 12,
-    borderRadius: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  iconCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 15,
-  },
-  materialInfo: {
-    flex: 1,
-  },
-  materialTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#2C3E50',
-    marginBottom: 3,
-  },
-  materialMeta: {
-    fontSize: 14,
-    color: '#7F8C8D',
-  },
+  container: { flex: 1, backgroundColor: '#F8F9FA' },
+  header: { padding: 30, borderBottomLeftRadius: 25, borderBottomRightRadius: 25 },
+  headerTitle: { fontSize: 28, fontWeight: 'bold', color: 'white', marginBottom: 5 },
+  headerSubtitle: { fontSize: 18, color: 'rgba(255, 255, 255, 0.95)' },
+  content: { padding: 20 },
+  title: { fontSize: 24, fontWeight: 'bold', padding: 20 },
+  description: { fontSize: 16, paddingHorizontal: 20, color: '#7F8C8D' },
+  sectionTitle: { fontSize: 20, fontWeight: 'bold', marginBottom: 15, color: '#2C3E50' },
+  ageGroupCard: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 20, marginHorizontal: 20, marginBottom: 10, borderRadius: 15 },
+  ageGroupIcon: { fontSize: 40, marginRight: 15 },
+  ageGroupName: { fontSize: 18, fontWeight: '600' },
+  materialCard: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', padding: 15, marginBottom: 12, borderRadius: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3 },
+  iconCircle: { width: 50, height: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center', marginRight: 15 },
+  materialInfo: { flex: 1 },
+  materialTitle: { fontSize: 16, fontWeight: '600', color: '#2C3E50', marginBottom: 3 },
+  materialMeta: { fontSize: 14, color: '#7F8C8D' },
 });

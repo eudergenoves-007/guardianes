@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
   Dimensions,
   ImageBackground,
-  Image,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
+import { getAllAudiosPlaylist } from '../data/adventuresData';
 
 const { width } = Dimensions.get('window');
 
@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation }) {
       title: 'Continuar\nAventura',
       icon: 'play-circle',
       color: '#27AE60',
-      screen: 'Adventures',
+      screen: 'Aventuras',
     },
     {
       id: 2,
@@ -43,7 +43,7 @@ export default function HomeScreen({ navigation }) {
       title: 'Audio\nCuentos',
       icon: 'headset',
       color: '#9B59B6',
-      screen: 'RommelFiPlayer',
+      screen: 'AudioPlayer',
     },
   ];
 
@@ -59,14 +59,6 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.welcomeText}>
             Bienvenido al Jardín de Dios 🌱
           </Text>
-          
-          {/* INYECCIÓN DEL JAGUAR EN VENTANA CIRCULAR */}
-          <Animatable.View animation="pulse" iterationCount="infinite" style={styles.mascotContainer}>
-            <Image 
-              source={require('../../assets/jaguar.png')} 
-              style={styles.mascotImage} 
-            />
-          </Animatable.View>
         </Animatable.View>
 
         {/* Nivel y progreso */}
@@ -96,7 +88,21 @@ export default function HomeScreen({ navigation }) {
             >
               <TouchableOpacity
                 style={[styles.actionCard, { backgroundColor: action.color }]}
-                onPress={() => navigation.navigate(action.screen)}
+                onPress={() => {
+                  // LÓGICA CORREGIDA PARA EL BOTÓN DE AUDIO
+                  if (action.title.includes('Audio')) {
+                    const globalPlaylist = getAllAudiosPlaylist();
+                    if(globalPlaylist && globalPlaylist.length > 0) {
+                      navigation.navigate('RommelFiPlayer', {
+                        material: globalPlaylist[0],
+                        playlist: globalPlaylist,
+                        startIndex: 0
+                      });
+                    }
+                  } else {
+                    navigation.navigate(action.screen);
+                  }
+                }}
               >
                 <Ionicons name={action.icon} size={40} color="white" />
                 <Text style={styles.actionText}>{action.title}</Text>
@@ -174,28 +180,7 @@ const styles = StyleSheet.create({
   },
   headerContent: {
     marginBottom: 20,
-    alignItems: 'center', // Centra el texto y al Jaguar
   },
-  
-  /* ESTILOS NUEVOS PARA EL JAGUAR */
-  mascotContainer: {
-    marginTop: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 8,
-  },
-  mascotImage: {
-    width: 130,
-    height: 130,
-    borderRadius: 65, // Forzamos el círculo perfecto ocultando las esquinas del icono cuadrado
-    borderWidth: 4,
-    borderColor: 'white',
-    backgroundColor: '#2ECC71',
-  },
-  /* FIN ESTILOS DEL JAGUAR */
-
   greeting: {
     fontSize: 28,
     fontWeight: 'bold',
