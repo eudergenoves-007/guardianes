@@ -43,7 +43,7 @@ export default function HomeScreen({ navigation }) {
       title: 'Audio\nCuentos',
       icon: 'headset',
       color: '#9B59B6',
-      screen: 'AudioPlayer',
+      screen: 'RommelFiPlayer',
     },
   ];
 
