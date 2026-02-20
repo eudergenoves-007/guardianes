@@ -68,7 +68,7 @@ export default function App() {
   return (
     <RommelFiProvider>
       <PaperProvider>
-        <NavigationContainer>
+        <NavigationContainer linking={{ prefixes: [""] }}>
           <Stack.Navigator
             initialRouteName="Splash"
             screenOptions={{

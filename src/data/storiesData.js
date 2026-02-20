@@ -22,8 +22,8 @@ export const STORIES = {
       {
         type: 'content',
         image: null,
-        dropCap: 'H',
-        text: 'abía una vez un bosque tan hermoso que los pájaros lo llamaban "El Jardín del Creador". Cada árbol conocía su lugar. Cada flor sabía cuándo abrir sus pétalos. Las abejas zumbaban canciones mientras trabajaban, y el viento llevaba historias de rama en rama.',
+        
+        text: 'Había una vez un bosque tan hermoso que los pájaros lo llamaban "El Jardín del Creador". Cada árbol conocía su lugar. Cada flor sabía cuándo abrir sus pétalos. Las abejas zumbaban canciones mientras trabajaban, y el viento llevaba historias de rama en rama.',
         gradientColors: ['#FFF8E1', '#FFFBF0'],
       },
       {
