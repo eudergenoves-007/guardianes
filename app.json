@@ -26,16 +26,21 @@
       "package": "com.guardianes.jardin"
     },
     "web": {
-      "favicon": "./assets/favicon.png",
-      "shortName": "Futura Editions",
-      "name": "Guardianes - Futura Editions",
+      "name": "Guardianes Futura Editions",
+      "shortName": "Guardianes",
       "display": "standalone",
-      "themeColor": "#27AE60",
       "backgroundColor": "#F5E6D3",
+      "themeColor": "#27AE60",
+      "description": "Cuentos Interactivos - Futura Editions",
       "config": {
         "pwa": {
           "icon": "./assets/icons/android-chrome-512x512.png",
           "manifest": {
+            "theme_color": "#27AE60",
+            "background_color": "#F5E6D3",
+            "display": "standalone",
+            "scope": "/",
+            "start_url": "/",
             "icons": [
               {
                 "src": "./assets/icons/android-chrome-192x192.png",
