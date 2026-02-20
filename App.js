@@ -9,6 +9,8 @@ import { Ionicons } from '@expo/vector-icons';
 // Importar pantallas originales
 import SplashScreen from './src/screens/SplashScreen';
 import HomeScreen from './src/screens/HomeScreen';
+import StoryLibrary from './src/screens/StoryLibrary';
+import StoryBookReader from './src/screens/StoryBookReader';
 import AdventuresScreen from './src/screens/AdventuresScreen';
 import AdventureDetailScreen from './src/screens/AdventureDetailScreen';
 import AgeGroupScreen from './src/screens/AgeGroupScreen';
@@ -99,6 +101,16 @@ export default function App() {
             <Stack.Screen 
               name="RommelFiPlayer" 
               component={RommelFiPlayerScreen}
+              options={{ headerShown: false }} 
+            />
+            <Stack.Screen 
+              name="StoryLibrary" 
+              component={StoryLibrary} 
+              options={{ headerShown: true, title: 'Biblioteca de Cuentos' }} 
+            />
+            <Stack.Screen 
+              name="StoryBookReader" 
+              component={StoryBookReader} 
               options={{ headerShown: false }} 
             />
           </Stack.Navigator>

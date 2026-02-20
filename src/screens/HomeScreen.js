@@ -45,6 +45,13 @@ export default function HomeScreen({ navigation }) {
       color: '#9B59B6',
       screen: 'AudioPlayer',
     },
+      {
+        id: 5,
+        title: 'Biblioteca\nCuentos',
+        icon: 'book',
+        color: '#8B4513',
+        screen: 'StoryLibrary',
+      },
   ];
 
   return (
