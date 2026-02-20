@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Guardianes del Jardín",
+    "slug": "guardianes-del-jardin",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#27AE60"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.guardianes.jardin"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#27AE60"
+      },
+      "package": "com.guardianes.jardin"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
