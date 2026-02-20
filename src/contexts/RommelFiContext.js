@@ -1,17 +1,14 @@
 // src/contexts/RommelFiContext.js
-// CONTEXTO GLOBAL PARA REPRODUCCIÓN PERSISTENTE (CORREGIDO)
+// CONTEXTO GLOBAL - CORREGIDO PARA RUTAS WEB DIRECTAS
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Audio } from 'expo-av';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RommelFiContext = createContext();
 
 export const useRommelFi = () => {
   const context = useContext(RommelFiContext);
-  if (!context) {
-    throw new Error('useRommelFi debe usarse dentro de RommelFiProvider');
-  }
+  if (!context) throw new Error('useRommelFi debe usarse dentro de RommelFiProvider');
   return context;
 };
 
@@ -65,10 +62,10 @@ export const RommelFiProvider = ({ children }) => {
     }
   };
 
+  // AQUÍ ESTABA EL ERROR: AHORA ACEPTA RUTAS LOCALES ("/")
   const processAudioUrl = (url) => {
     if (!url) return null;
-    if (url.startsWith('http://') || url.startsWith('https://')) {
-      // Forzar enlace directo de Google Drive
+    if (typeof url === 'string') {
       if (url.includes('drive.google.com/file/d/')) {
         const fileId = url.match(/\/d\/([^\/]+)/)?.[1];
         if (fileId) {
@@ -147,7 +144,6 @@ export const RommelFiProvider = ({ children }) => {
     }
   };
 
-  // Corrección crítica: Si entra un track solo, lo ponemos en la playlist temporal
   const playTrack = async (track, index = 0) => {
     if (playlist.length === 0) setPlaylist([track]);
     await loadAndPlayTrack(track, index);
@@ -156,7 +152,7 @@ export const RommelFiProvider = ({ children }) => {
   const setPlaylistAndPlay = async (tracks, startIndex = 0) => {
     if (!tracks || tracks.length === 0) return;
     setPlaylist(tracks);
-    setCurrentTrack(tracks[startIndex]); // Forzar que el título cambie de inmediato
+    setCurrentTrack(tracks[startIndex]);
     await loadAndPlayTrack(tracks[startIndex], startIndex);
   };
 
