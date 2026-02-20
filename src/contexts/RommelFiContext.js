@@ -1,8 +1,9 @@
 // src/contexts/RommelFiContext.js
-// CONTEXTO GLOBAL - CORREGIDO PARA RUTAS WEB DIRECTAS
+// AUDITORÍA APLICADA: CORRECCIÓN DE RUTAS ABSOLUTAS PARA WEB (RENDER)
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Audio } from 'expo-av';
+import { Platform } from 'react-native';
 
 const RommelFiContext = createContext();
 
@@ -57,20 +58,26 @@ export const RommelFiProvider = ({ children }) => {
         handleTrackFinished();
       }
     } else if (status.error) {
-      console.error('Error en reproducción:', status.error);
+      console.error('Error fatal de expo-av:', status.error);
       setIsLoading(false);
+      setIsPlaying(false);
     }
   };
 
-  // AQUÍ ESTABA EL ERROR: AHORA ACEPTA RUTAS LOCALES ("/")
+  // EL CEREBRO CORREGIDO: CONSTRUYE RUTAS ABSOLUTAS PARA LA WEB
   const processAudioUrl = (url) => {
     if (!url) return null;
     if (typeof url === 'string') {
       if (url.includes('drive.google.com/file/d/')) {
         const fileId = url.match(/\/d\/([^\/]+)/)?.[1];
-        if (fileId) {
-          return `https://drive.google.com/uc?export=download&id=${fileId}`;
-        }
+        if (fileId) return `https://drive.google.com/uc?export=download&id=${fileId}`;
+      }
+      
+      // PARCHE WEB: Si la ruta empieza con "/", le pegamos el dominio principal
+      if (url.startsWith('/') && Platform.OS === 'web' && typeof window !== 'undefined') {
+        const fullUrl = window.location.origin + url;
+        console.log("Ruta web absoluta generada:", fullUrl); // Auditoría visual en tu navegador
+        return fullUrl;
       }
       return url;
     }
@@ -94,7 +101,9 @@ export const RommelFiProvider = ({ children }) => {
       }
 
       const audioUrl = processAudioUrl(track.file || track.url);
-      if (!audioUrl) throw new Error('URL de audio no válida');
+      if (!audioUrl) throw new Error('URL de audio no generada');
+
+      console.log("Intentando reproducir:", audioUrl); // Log para saber exactamente qué pide
 
       const audioSource = typeof audioUrl === 'string' ? { uri: audioUrl } : audioUrl;
 
@@ -111,8 +120,9 @@ export const RommelFiProvider = ({ children }) => {
       setIsLoading(false);
       setPlayCount(prev => prev + 1);
     } catch (error) {
-      console.error('Error cargando track:', error);
+      console.error('Error cargando track. Revisa si el archivo existe:', error);
       setIsLoading(false);
+      setIsPlaying(false);
     }
   };
 
