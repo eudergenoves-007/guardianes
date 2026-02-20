@@ -27,8 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "shortName": "Guardianes",
-      "name": "Guardianes del Jardín",
+      "shortName": "Futura Editions",
+      "name": "Guardianes - Futura Editions",
       "display": "standalone",
       "themeColor": "#27AE60",
       "backgroundColor": "#F5E6D3",
