@@ -14,7 +14,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
-import { STORIES_DATA, getStoriesByAgeGroup } from '../data/storiesData';
+import { STORIES_LIST, getStoriesByAgeGroup } from '../data/storiesData';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = (width - 60) / 2;
@@ -32,7 +32,7 @@ export default function StoryLibrary({ navigation }) {
 
   const filteredStories =
     selectedFilter === 'todos'
-      ? Object.values(STORIES_DATA)
+      ? STORIES_LIST
       : getStoriesByAgeGroup(selectedFilter);
 
   const openStory = (story) => {
